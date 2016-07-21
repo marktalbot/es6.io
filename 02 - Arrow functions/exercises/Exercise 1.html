@@ -44,7 +44,7 @@
   let videos = Array.from(document.getElementsByTagName('li'));
 
    // Filter for only the elements that contain the word 'flexbox'
-  let flexboxVideos = videos.filter((video) => video.textContent === 'Flexbox Video');
+  let flexboxVideos = videos.filter((video) => video.textContent.includes('Flexbox'));
   console.log(flexboxVideos);
 
   // map down to a list of time strings
@@ -63,7 +63,7 @@
 
   // 🔥 This can also be done in a single .reduce(), but we're practicing arrow functions here, so chain them!
   let videos2 = Array.from(document.getElementsByTagName('li'))
-                .filter((video) => video.textContent === 'Flexbox Video')
+                .filter((video) => video.textContent.includes('Flexbox'))
                 .map((video) => video.dataset.time)
                 .map((time) => convertToSeconds(time))
                 .reduce((last, current) => last + current, 0);
