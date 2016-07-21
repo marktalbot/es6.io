@@ -31,17 +31,44 @@
 
 <script>
 
-  // Select all the list items on the page and convert to array
+  function convertToSeconds(time) {
+    
+    let timeArray = time.split(':');
+    let mins      = parseInt(timeArray[0]) * 60;
+    let secs      = parseInt(timeArray[1]);
 
-  // Filter for only the elements that contain the word 'flexbox'
+    return mins + secs;
+  }
+
+  // Select all the list items on the page and convert to array
+  let videos = Array.from(document.getElementsByTagName('li'));
+
+   // Filter for only the elements that contain the word 'flexbox'
+  let flexboxVideos = videos.filter((video) => video.textContent === 'Flexbox Video');
+  console.log(flexboxVideos);
 
   // map down to a list of time strings
+  let times = flexboxVideos.map((video) => video.dataset.time);
+  console.log(times);
 
   // map to an array of seconds
+  let seconds = times.map((time) => convertToSeconds(time) );
+  console.log(seconds);
 
   // reduce to get total
+  let total = seconds.reduce((last, current) => {
+    return last + current;
+  }, 0);
+  console.log(total);
 
   // 🔥 This can also be done in a single .reduce(), but we're practicing arrow functions here, so chain them!
+  let videos2 = Array.from(document.getElementsByTagName('li'))
+                .filter((video) => video.textContent === 'Flexbox Video')
+                .map((video) => video.dataset.time)
+                .map((time) => convertToSeconds(time))
+                .reduce((last, current) => last + current, 0);
+
+  console.log(videos2);
 
 </script>
 </body>
